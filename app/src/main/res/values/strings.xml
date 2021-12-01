@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Intellias_test</string>
+    <string name="explain_text">nothing</string>
+    <string name="word_text">Enter Your Word</string>
+
+
 </resources>

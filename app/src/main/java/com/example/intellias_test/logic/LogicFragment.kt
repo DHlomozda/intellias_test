@@ -1,25 +1,27 @@
 package com.example.intellias_test.logic
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import com.example.intellias_test.R
-import com.example.intellias_test.databinding.LogicFragmentBinding
+import com.example.intellias_test.databinding.FragmentLogicBinding
 
-class LogicFragment: Fragment() {
+
+class LogicFragment : Fragment() {
+
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: LogicFragmentBinding = DataBindingUtil.inflate(
-            inflater, R.layout.logic_fragment, container, false
+        // Inflate the layout for this fragment
+        val binding: FragmentLogicBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_logic, container, false
         )
-        
-        return  binding.root
+        return binding.root
     }
+
 }
