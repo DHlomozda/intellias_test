@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="logicViewModel"
+            type="com.example.intellias_test.logic.LogicViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/logicFragment"
         android:layout_width="match_parent"
@@ -34,6 +40,7 @@
             android:layout_marginTop="@dimen/button_margin"
             android:text="@string/button_enter"
             android:textColor="@color/black"
+            android:onClick="@{() -> logicViewModel.enterButtonClick()}"
             app:backgroundTint="@color/button_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -62,7 +69,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:lineSpacingMultiplier="@dimen/line_spacer"
-                    android:text="@string/discription" />
+                    android:text="@{@string/quote_format(logicViewModel.description)}" />
             </LinearLayout>
         </ScrollView>
 
