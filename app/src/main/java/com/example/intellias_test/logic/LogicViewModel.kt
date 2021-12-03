@@ -4,15 +4,11 @@ package com.example.intellias_test.logic
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.intellias_test.converData.ConvertFromJsonItem
 import com.example.intellias_test.network.EnglishApi
-import com.example.intellias_test.network.EnglishApiService
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
-import retrofit2.http.GET
-import javax.security.auth.callback.Callback
-
 
 
 class LogicViewModel: ViewModel() {
@@ -31,16 +27,24 @@ class LogicViewModel: ViewModel() {
     }
 
     private fun getWordFromApi() {
-    EnglishApi.retrofitService.getProperties(_word.value ?: "hello").enqueue(object : retrofit2.Callback<String> {
-        override fun onResponse(call: Call<String>, response: Response<String>) {
-            _description.value = response.body()
+    EnglishApi.retrofitService.getProperties(_word.value ?: "").enqueue(object : retrofit2.Callback<List<ConvertFromJsonItem>> {
+            override fun onResponse(call: Call<List<ConvertFromJsonItem>>, response: Response<List<ConvertFromJsonItem>>) {
+                setDescription(response)
 
         }
 
-        override fun onFailure(call: Call<String>, t: Throwable) {
+        override fun onFailure(call: Call<List<ConvertFromJsonItem>>, t: Throwable) {
             _description.value = "Failure " + t.message
         }
     })
+    }
+
+
+    private fun setDescription(response: Response<List<ConvertFromJsonItem>>) {
+        val items = response.body()?.get(0)
+        _description.value = "Your word: ${items?.word}\n"
+        _description.value += "Phonetics: ${items?.phonetics?.get(0)?.text}\n"
+        
     }
 
     //take word from view
