@@ -31,7 +31,7 @@ class LogicViewModel: ViewModel() {
     }
 
     private fun getWordFromApi() {
-    EnglishApi.retrofitService.getProperties().enqueue(object : retrofit2.Callback<String> {
+    EnglishApi.retrofitService.getProperties(_word.value ?: "hello").enqueue(object : retrofit2.Callback<String> {
         override fun onResponse(call: Call<String>, response: Response<String>) {
             _description.value = response.body()
 
