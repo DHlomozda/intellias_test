@@ -54,7 +54,8 @@ class LogicViewModel: ViewModel() {
                 _description.value += "  Example: \"${def.example}\" \n"
                 if(def.synonyms.isNotEmpty()) {
                     _description.value += "  Synonyms: \n"
-                    def.synonyms.forEach { _description.value += "\"$it\","  }
+                    def.synonyms.forEach { _description.value += "\"$it\", "  }
+                    _description.value += "\n"
                 }
             }
         }
@@ -63,6 +64,7 @@ class LogicViewModel: ViewModel() {
     //take word from view
     fun setWord(newWord: String) {
         _word.value = newWord
+        enterButtonClick()
     }
 
     fun enterButtonClick() {

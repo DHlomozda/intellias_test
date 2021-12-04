@@ -29,8 +29,8 @@ class LogicFragment : Fragment() {
         binding.logicViewModel = viewModel
         binding.setLifecycleOwner(this)
 
-        binding.wordText.setOnClickListener {
-            viewModel.setWord(it.word_text.text.toString())
+       binding.wordText.setOnClickListener {
+           viewModel.setWord(it.word_text.text.toString())
         }
 
         /*viewModel.word.observe(this, Observer { newWord ->
