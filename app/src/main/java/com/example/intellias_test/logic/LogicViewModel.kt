@@ -1,6 +1,7 @@
 package com.example.intellias_test.logic
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,7 +31,6 @@ class LogicViewModel: ViewModel() {
     EnglishApi.retrofitService.getProperties(_word.value ?: "").enqueue(object : retrofit2.Callback<List<ConvertFromJsonItem>> {
             override fun onResponse(call: Call<List<ConvertFromJsonItem>>, response: Response<List<ConvertFromJsonItem>>) {
                 setDescription(response)
-
         }
 
         override fun onFailure(call: Call<List<ConvertFromJsonItem>>, t: Throwable) {
@@ -40,11 +40,24 @@ class LogicViewModel: ViewModel() {
     }
 
 
+
     private fun setDescription(response: Response<List<ConvertFromJsonItem>>) {
         val items = response.body()?.get(0)
-        _description.value = "Your word: ${items?.word}\n"
-        _description.value += "Phonetics: ${items?.phonetics?.get(0)?.text}\n"
-        
+        var count = 0
+        _description.value = "Your word: \"${items?.word}\" \n"
+        _description.value += "Phonetics: \"${items?.phonetics?.get(0)?.text}\" \n"
+        _description.value += "Meaning: "
+        items?.meanings?.forEach { meaning ->
+            _description.value += "\n  Part of speech: \"${meaning.partOfSpeech}\" \n"
+            meaning.definitions.forEach { def ->
+                _description.value += "  Definition: \"${def.definition}\" \n"
+                _description.value += "  Example: \"${def.example}\" \n"
+                if(def.synonyms.isNotEmpty()) {
+                    _description.value += "  Synonyms: \n"
+                    def.synonyms.forEach { _description.value += "\"$it\","  }
+                }
+            }
+        }
     }
 
     //take word from view

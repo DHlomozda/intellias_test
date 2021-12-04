@@ -9,76 +9,56 @@
             type="com.example.intellias_test.logic.LogicViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/logicFragment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
-        tools:context=".logic.LogicFragment">
+        android:background="#2582D5"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/word_text"
-            style="@style/TextStyle"
+            style="@style/NameStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/layout_margin_top"
             android:ems="10"
             android:fontFamily="@font/roboto"
             android:hint="@string/word_text"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/button_enter"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/button_margin"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/layout_margin"
+            android:onClick="@{() -> logicViewModel.enterButtonClick()}"
             android:text="@string/button_enter"
             android:textColor="@color/black"
-            android:onClick="@{() -> logicViewModel.enterButtonClick()}"
-            app:backgroundTint="@color/button_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/word_text" />
+            app:backgroundTint="@color/button_color" />
 
         <ScrollView
             android:id="@+id/description"
-            android:layout_width="397dp"
-            android:layout_height="366dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/word_text_margin"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="@dimen/word_text_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_enter">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/layout_margin">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/description_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/description_text"
-                    style="@style/TextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="60dp"
-                    android:lineSpacingMultiplier="@dimen/line_spacer"
-                    android:text="@{@string/quote_format(logicViewModel.description)}" />
-            </LinearLayout>
+                android:lineSpacingMultiplier="@dimen/line_spacer"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@{@string/quote_format(logicViewModel.description)}"
+                android:textAppearance="@style/NameStyle" />
         </ScrollView>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>
