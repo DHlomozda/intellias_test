@@ -5,10 +5,11 @@ import com.example.intellias_test.converData.ConvertFromJsonItem
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 import retrofit2.http.GET
 import retrofit2.http.Path
 
+// uses retrofit 2 to parse json string from API
+// uses GsonConvertor to convert data from Json string to kotlin data
 private const val BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/"
 private val retrofit by lazy {
     Retrofit.Builder()

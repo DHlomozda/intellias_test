@@ -1,9 +1,9 @@
 package com.example.intellias_test.converData
 
-//class ConvertFromJson : ArrayList<ConvertFromJsonItem>()
-
+//data class where hold data from Json object
 data class ConvertFromJsonItem(
     val meanings: List<Meaning>,
+    val origin: String,
     val phonetics: List<Phonetic>,
     val word: String
 )
@@ -19,6 +19,7 @@ data class Phonetic(
 )
 
 data class Definition(
+    val antonyms: List<String>,
     val definition: String,
     val example: String,
     val synonyms: List<String>

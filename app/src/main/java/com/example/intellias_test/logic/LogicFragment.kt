@@ -26,6 +26,7 @@ class LogicFragment : Fragment() {
             inflater, R.layout.fragment_logic, container, false
         )
 
+        //data binding
         binding.logicViewModel = viewModel
         binding.setLifecycleOwner(this)
 
