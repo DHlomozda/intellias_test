@@ -30,11 +30,14 @@ class LogicViewModel: ViewModel() {
     private fun getWordFromApi() {
     EnglishApi.retrofitService.getProperties(_word.value ?: "").enqueue(object : retrofit2.Callback<List<ConvertFromJsonItem>> {
             override fun onResponse(call: Call<List<ConvertFromJsonItem>>, response: Response<List<ConvertFromJsonItem>>) {
+                if(response.body() == null) {
+                    _description.value = "Error: field is empty or can`t find the word"
+                }
                 setDescription(response)
         }
 
         override fun onFailure(call: Call<List<ConvertFromJsonItem>>, t: Throwable) {
-            _description.value = "Failure " + t.message
+            _description.value = "Failure " + t.message + "\nProbably no connection to the internet"
         }
     })
     }
@@ -64,10 +67,16 @@ class LogicViewModel: ViewModel() {
     //take word from view
     fun setWord(newWord: String) {
         _word.value = newWord
-        enterButtonClick()
+        if(_word.value.toString().isEmpty()) {
+            _description.value = "Field is empty. Please enter your word"
+        }
+        else {
+            enterButtonClick()
+        }
+
     }
 
-    fun enterButtonClick() {
+    private fun enterButtonClick() {
         getWordFromApi()
     }
 }
